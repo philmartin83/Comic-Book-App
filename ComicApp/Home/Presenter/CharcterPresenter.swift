@@ -36,7 +36,7 @@ class CharaterPresenter {
         
         let leftTitle = UILabel()
         leftTitle.font = UIFont.boldSystemFont(ofSize: 17)
-        leftTitle.text = "Comic Charaters"
+        leftTitle.text = "Comic Characters"
         leftTitle.textColor = .white // we can add some custom colours later
         controller?.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftTitle)
     }
