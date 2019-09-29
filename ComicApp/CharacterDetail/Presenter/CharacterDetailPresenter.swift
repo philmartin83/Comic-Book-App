@@ -14,6 +14,7 @@ class CharacterDetailPresenter{
     
     var characterDetailTableView: UITableView = {
         let tableView = UITableView(frame: .zero)
+        tableView.backgroundColor = .white // not supporting dark mode currently
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
