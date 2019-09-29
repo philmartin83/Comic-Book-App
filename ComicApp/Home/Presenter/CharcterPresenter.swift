@@ -9,7 +9,7 @@
 import UIKit
 
 
-class CharaterPresenter {
+class CharaterPresenter: NSObject, UICollectionViewDelegate {
     
     weak var controller: CharacterListViewController?
     private let dataSource = CollectionViewDataSource()
@@ -24,20 +24,21 @@ class CharaterPresenter {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
         collection.translatesAutoresizingMaskIntoConstraints = false
-        
         return collection
     }()
     
     func configureNavigationBar(){
+        controller?.navigationController?.navigationBar.barStyle = .black
         let navBar = controller?.navigationController?.navigationBar
         navBar?.shadowImage = UIImage()
         navBar?.isTranslucent = false
         navBar?.barTintColor = .red
         
         let leftTitle = UILabel()
-        leftTitle.font = UIFont.boldSystemFont(ofSize: 17)
+        leftTitle.font = UIFont(name: heroFontName, size: 20)
         leftTitle.text = "Comic Characters"
         leftTitle.textColor = .white // we can add some custom colours later
+        leftTitle.applyShadow(shadowColour: .black)
         controller?.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftTitle)
     }
     
@@ -45,18 +46,18 @@ class CharaterPresenter {
         guard let controller = controller else {return} // could add an alertview view
         controller.view.addSubview(collectionView)
         collectionView.dataSource = dataSource
+        collectionView.delegate = self
         collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: "Characters")
-        collectionView.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
+        collectionView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: controller.view.bottomAnchor).isActive = true
+        collectionView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         fetchData()
     }
     
     //MARK:- Helper
     private func fetchData(){
         dataSource.fetchData()
-        
         dataSource.updateUIWithData = { [weak self] (error) in
             if error == nil{
                 DispatchQueue.main.async {
@@ -66,5 +67,19 @@ class CharaterPresenter {
            
         }
     }
+    
+    //MARK:- CollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let character = dataSource.comicData?.apiDataSource?.characters?[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.animateButtonPress()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            let detailViewController = CharacterDetailViewController()
+            detailViewController.characterID = character?.id
+        self?.controller?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
+    
     
 }

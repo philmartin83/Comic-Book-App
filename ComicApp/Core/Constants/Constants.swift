@@ -8,8 +8,4 @@
 
 import Foundation
 
-let privateKey = "developer.marvel.com private key"
-let publicKey = "developer.marvel.com public key"
-
-
-let heroFontName = "BadaBoom BB"
+let heroFontName = "BadaBoomBB"

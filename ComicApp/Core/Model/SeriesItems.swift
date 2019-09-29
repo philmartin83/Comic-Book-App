@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct SeriesItems : Codable {
     let resourceURI : String?
     let name : String?

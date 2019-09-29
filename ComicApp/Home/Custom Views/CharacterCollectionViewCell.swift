@@ -13,12 +13,13 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleToFill
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 5
+        image.layer.cornerRadius = 15
         return image
     }()
     
-    var nameHolderView: UIView = {
+    fileprivate var nameHolderView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -28,11 +29,14 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     var name: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: heroFontName, size: 40)
+        label.textColor = .white
         return label
     }()
     
     override func layoutSubviews() {
+        self.applyShadow(shadowColour: .black)
         contentView.addSubview(heroImage)
         heroImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         heroImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
@@ -44,6 +48,11 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         nameHolderView.trailingAnchor.constraint(equalTo: heroImage.trailingAnchor).isActive = true
         nameHolderView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         nameHolderView.bottomAnchor.constraint(equalTo: heroImage.bottomAnchor).isActive = true
+        
+        nameHolderView.addSubview(name)
+        name.leadingAnchor.constraint(equalTo: nameHolderView.leadingAnchor, constant: 20).isActive = true
+        name.trailingAnchor.constraint(equalTo: nameHolderView.trailingAnchor, constant: -20).isActive = true
+        name.centerYAnchor.constraint(equalTo: nameHolderView.centerYAnchor).isActive = true
         
     }
 }

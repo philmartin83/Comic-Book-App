@@ -17,7 +17,11 @@ class CharacterListViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white // use systemBackground if you wish to support dark mode in iOS 13
         presenter.controller = self
-        presenter.configureNavigationBar()
         presenter.displayLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.configureNavigationBar()
     }
 }

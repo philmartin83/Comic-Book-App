@@ -11,13 +11,26 @@ import Foundation
 class RequestHandler{
     let baseURL = "http://gateway.marvel.com"
     let timeout: TimeInterval = 10
+    let httpGET = "GET"
+    let httpPOST = "POST"
     
     func getCharacters() -> URLRequest{
         let endpoint = "/v1/public/characters"
-        let timeStamp = Date().timeIntervalSince1970
-        let url = baseURL + endpoint + "?" + queryStringForURL(timeStamp: timeStamp)
+        let timestamp = Date().timeIntervalSince1970
+        let url = baseURL + endpoint + "?" + queryStringForURL(timestamp: timestamp)
         print(url)
-        let request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
+        var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
+        request.httpMethod = httpGET
+        return request
+    }
+    
+    func getCharacterByID(id: Int) -> URLRequest{
+        let endpoint = "/v1/public/characters/\(id)"
+        let timestamp = Date().timeIntervalSince1970
+        let url = baseURL + endpoint + "?" + queryStringForURL(timestamp: timestamp)
+        var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
+        request.httpMethod = httpGET
+        print(request)
         return request
     }
     
@@ -27,7 +40,7 @@ class RequestHandler{
         return MD5(str: hashThisString)
     }
     
-    private func queryStringForURL(timeStamp: TimeInterval) -> String{
-       return "ts=\(timeStamp)&apikey=\(publicKey)&hash=" + buildAuthTokenForRequest(timeStamp: timeStamp) + "&limit=70"
+    private func queryStringForURL(timestamp: TimeInterval) -> String{
+       return "ts=\(timestamp)&apikey=\(publicKey)&hash=" + buildAuthTokenForRequest(timeStamp: timestamp) + "&limit=70"
     }
 }
