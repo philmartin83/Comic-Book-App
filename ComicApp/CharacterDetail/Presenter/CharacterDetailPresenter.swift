@@ -11,6 +11,7 @@ import UIKit
 class CharacterDetailPresenter{
     
     weak var controller: CharacterDetailViewController?
+    var characterDataSource = CharacterDetailTableViewDataSource()
     
     var characterDetailTableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -55,10 +56,13 @@ class CharacterDetailPresenter{
         
         guard let controller = controller else {return}
         controller.view.addSubview(characterDetailTableView)
+        characterDetailTableView.dataSource = characterDataSource
+        characterDataSource.fetechCharacterData(characterID: controller.characterID) // get passed character ID
         characterDetailTableView.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
         characterDetailTableView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
         characterDetailTableView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
         characterDetailTableView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
         
     }
 }

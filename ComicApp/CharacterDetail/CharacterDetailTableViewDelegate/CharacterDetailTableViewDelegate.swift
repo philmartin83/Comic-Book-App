@@ -18,8 +18,11 @@ class CharacterDetailTableViewDelegate: NSObject, UITableViewDelegate{
         if section == 1{
             return setupSectionHeader(title: "Character Bio", tableView: tableView)
         }
-        
         return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

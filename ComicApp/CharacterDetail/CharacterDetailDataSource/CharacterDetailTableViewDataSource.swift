@@ -10,6 +10,17 @@ import UIKit
 
 class CharacterDetailTableViewDataSource: NSObject, UITableViewDataSource{
     
+    var updateUI:(()-> Void)?
+    
+    func fetchCharacterData(characterID: Int?){
+        guard let id = characterID else {return} // return an alert view explaning coukd get character id
+        let request = RequestHandler().getCharacterByID(id: id)
+        JSONDecoder().decoderWithRequest(ComicData.self, fromURLRequest: request) { (result, error) in
+            
+        }
+        
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -20,9 +31,11 @@ class CharacterDetailTableViewDataSource: NSObject, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0{
-//
-//        }else if indexPath.section == 1{
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterHeader", for: indexPath) as! CharacterHeaderTableViewCell
+            return cell
+        }
+//        else if indexPath.section == 1{
 //
 //        }else{
 //
