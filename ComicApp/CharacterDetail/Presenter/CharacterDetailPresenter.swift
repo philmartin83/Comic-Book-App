@@ -18,32 +18,26 @@ class CharacterDetailPresenter{
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .white // not supporting dark mode currently
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
     
     func configureNavigationBar(){
-        
-        controller?.navigationController?.navigationBar.barStyle = .default
-        controller?.navigationController?.navigationItem.hidesBackButton = true
-        let navBar = controller?.navigationController?.navigationBar
-        navBar?.barTintColor = .yellow
-        navBar?.shadowImage = UIImage()
-        navBar?.isTranslucent = false
-        
+    
         let label = UILabel()
         label.text = "Character Information"
-        label.textColor = .black
+        label.textColor = .white
         label.font = UIFont(name: heroFontName, size: 20)
-        label.applyShadow(shadowColour: .white)
+        label.applyShadow(shadowColour: .black)
         
         let backButton = UIButton(type: .custom)
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.tintColor = .black
+        backButton.tintColor = .white
         let image = UIImageView(image: UIImage(named: "BackButton")?.withRenderingMode(.alwaysTemplate))
         image.tintColor = .white
         backButton.setImage(image.image, for: .normal)
         backButton.addTarget(controller?.interactor, action: #selector(controller?.interactor.popViewController), for: .touchUpInside)
-        backButton.applyShadow(shadowColour: .white)
+        backButton.applyShadow(shadowColour: .black)
         
         let item1 = UIBarButtonItem(customView: backButton)
         
@@ -57,14 +51,15 @@ class CharacterDetailPresenter{
         
         guard let controller = controller else {return}
         controller.view.addSubview(characterDetailTableView)
+        characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
         characterDetailTableView.dataSource = characterDataSource
         characterDetailTableView.delegate = characterTableViewDelegate
         characterDataSource.fetchDataFromSelectedArray(character: controller.character)
         characterDetailTableView.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
         characterDetailTableView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
         characterDetailTableView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
-        characterDetailTableView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
+        characterDetailTableView.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         
     }
 }
