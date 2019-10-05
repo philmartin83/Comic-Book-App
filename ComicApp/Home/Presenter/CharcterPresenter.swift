@@ -76,7 +76,7 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
         cell?.animateButtonPress()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             let detailViewController = CharacterDetailViewController()
-            detailViewController.characterID = character?.id
+            detailViewController.character = character
         self?.controller?.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }

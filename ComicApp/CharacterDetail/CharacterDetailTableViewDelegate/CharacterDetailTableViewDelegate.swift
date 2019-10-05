@@ -11,7 +11,8 @@ import UIKit
 class CharacterDetailTableViewDelegate: NSObject, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+//        return UITableView.automaticDimension
+        return 110
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

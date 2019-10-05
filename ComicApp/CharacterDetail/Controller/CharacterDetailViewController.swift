@@ -13,14 +13,15 @@ class CharacterDetailViewController: UIViewController {
     var presenter = CharacterDetailPresenter()
     var interactor = CharacterDetailInteractor()
     
-    var characterID: Int?
+    var character: Character?
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         view.backgroundColor = .white
         presenter.controller = self
         presenter.configureNavigationBar()
         presenter.displayLayout()
         interactor.controller = self
-        // Do any additional setup after loading the view.
+
     }
 }

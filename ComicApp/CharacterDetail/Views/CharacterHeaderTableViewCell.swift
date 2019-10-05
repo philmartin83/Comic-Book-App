@@ -34,6 +34,7 @@ class CharacterHeaderTableViewCell: UITableViewCell {
         profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
+//        profileImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
     }
 

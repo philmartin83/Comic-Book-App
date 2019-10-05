@@ -12,6 +12,7 @@ class CharacterDetailPresenter{
     
     weak var controller: CharacterDetailViewController?
     var characterDataSource = CharacterDetailTableViewDataSource()
+    var characterTableViewDelegate = CharacterDetailTableViewDelegate()
     
     var characterDetailTableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -57,7 +58,8 @@ class CharacterDetailPresenter{
         guard let controller = controller else {return}
         controller.view.addSubview(characterDetailTableView)
         characterDetailTableView.dataSource = characterDataSource
-        characterDataSource.fetechCharacterData(characterID: controller.characterID) // get passed character ID
+        characterDetailTableView.delegate = characterTableViewDelegate
+        characterDataSource.fetchDataFromSelectedArray(character: controller.character)
         characterDetailTableView.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
         characterDetailTableView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
         characterDetailTableView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
