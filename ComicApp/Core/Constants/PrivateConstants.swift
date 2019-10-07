@@ -8,5 +8,5 @@
 
 import Foundation
 
-let privateKey = "62506b06c5b697839092ca6eac02e1d8f23683db" //"developer.marvel.com private key"
-let publicKey = "452b2ec51923e10bdf4c22421a862607" //"developer.marvel.com public key"
+let privateKey = "" //"developer.marvel.com private key"
+let publicKey = "" //"developer.marvel.com public key"
