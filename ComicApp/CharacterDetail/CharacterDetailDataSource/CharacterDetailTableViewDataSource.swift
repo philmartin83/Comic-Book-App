@@ -30,14 +30,19 @@ class CharacterDetailTableViewDataSource: NSObject, UITableViewDataSource{
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterHeader", for: indexPath) as! CharacterHeaderTableViewCell
             let imagePath = "\(character?.thumbnail?.path ?? "").\(character?.thumbnail?.fileExtension ?? "")"
-            print("IMAGE PATH: \(imagePath)")
             cell.profileImage.sd_setImage(with: URL(string: imagePath), completed: nil)
             cell.nameOfHero.text = character?.name
             return cell
+        }else if indexPath.section == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterDescriptionCell", for: indexPath) as! CharacterDescriptionTableViewCell
+            if character?.description == ""{
+                cell.descriptionLabel.text = "No character description."
+            }else{
+                cell.descriptionLabel.text = character?.description
+            }
+            return cell
         }
-//        else if indexPath.section == 1{
-//
-//        }else{
+ //       else{
 //
 //        }
         

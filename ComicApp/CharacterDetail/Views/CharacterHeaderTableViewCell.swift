@@ -25,18 +25,24 @@ class CharacterHeaderTableViewCell: UITableViewCell {
         label.font = UIFont(name: heroFontName, size: 40)
         return label
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
-        self.layoutTableViewCell()
+        layoutTableViewCell()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layoutTableViewCell(){
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+    
+    fileprivate func layoutTableViewCell(){
         
         contentView.addSubview(profileImage)
         profileImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
@@ -51,11 +57,5 @@ class CharacterHeaderTableViewCell: UITableViewCell {
         contentView.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 10).isActive = true
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }

@@ -52,6 +52,7 @@ class CharacterDetailPresenter{
         guard let controller = controller else {return}
         controller.view.addSubview(characterDetailTableView)
         characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
+        characterDetailTableView.register(CharacterDescriptionTableViewCell.self, forCellReuseIdentifier: "CharacterDescriptionCell")
         characterDetailTableView.dataSource = characterDataSource
         characterDetailTableView.delegate = characterTableViewDelegate
         characterDataSource.fetchDataFromSelectedArray(character: controller.character)
