@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharacterComicTableViewCell: UITableViewCell {
+final class CharacterComicTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -44,6 +44,11 @@ class CharacterComicTableViewCell: UITableViewCell {
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        registerCollectionViewCells()
         
+    }
+    
+    fileprivate func registerCollectionViewCells(){
+//        collectionView
     }
 }

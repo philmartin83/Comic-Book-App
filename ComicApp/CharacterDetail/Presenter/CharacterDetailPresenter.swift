@@ -23,7 +23,7 @@ class CharacterDetailPresenter{
     }()
     
     func configureNavigationBar(){
-    
+        
         let label = UILabel()
         label.text = "Character Information"
         label.textColor = .white
@@ -51,8 +51,10 @@ class CharacterDetailPresenter{
         
         guard let controller = controller else {return}
         controller.view.addSubview(characterDetailTableView)
-        characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
-        characterDetailTableView.register(CharacterDescriptionTableViewCell.self, forCellReuseIdentifier: "CharacterDescriptionCell")
+        
+        //register cells
+        registerTableViewCells()
+        
         characterDetailTableView.dataSource = characterDataSource
         characterDetailTableView.delegate = characterTableViewDelegate
         characterDataSource.fetchDataFromSelectedArray(character: controller.character)
@@ -61,7 +63,12 @@ class CharacterDetailPresenter{
         characterDetailTableView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
         characterDetailTableView.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        
+    }
+    
+    fileprivate func registerTableViewCells(){
+        characterDetailTableView.register(CharacterHeaderTableViewCell.self, forCellReuseIdentifier: "CharacterHeader")
+        characterDetailTableView.register(CharacterDescriptionTableViewCell.self, forCellReuseIdentifier: "CharacterDescriptionCell")
+        characterDetailTableView.register(CharacterComicTableViewCell.self, forCellReuseIdentifier: "CharacterComics")
     }
 }
 
