@@ -17,7 +17,6 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
     var collectionView: UICollectionView = {
        let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.size.width)
-//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumLineSpacing = 5.0
         
@@ -56,7 +55,7 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
     }
     
     //MARK:- Helper
-    private func fetchData(){
+    fileprivate func fetchData(){
         dataSource.fetchData()
         dataSource.updateUIWithData = { [weak self] (error) in
             if error == nil{
@@ -64,14 +63,13 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
                     self?.collectionView.reloadData()
                 }
             }
-           
         }
     }
     
     //MARK:- CollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let character = dataSource.comicData?.apiDataSource?.characters?[indexPath.item]
+        let character = dataSource.characterData?.apiDataSource?.characters?[indexPath.item]
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.animateButtonPress()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in

@@ -15,5 +15,5 @@ struct Character: Codable {
     let modified : String?
     let thumbnail : Thumbnail?
     let resourceURI : String?
-    let comics : Comics?
+    let comics : CharacterComics?
 }

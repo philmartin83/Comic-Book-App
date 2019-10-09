@@ -41,11 +41,10 @@ class CharacterDetailTableViewDataSource: NSObject, UITableViewDataSource{
                 cell.descriptionLabel.text = character?.description
             }
             return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterComics", for: indexPath) as! CharacterComicTableViewCell
+            cell.dataSource.fetchComicData(series: character?.comics?.collectionURI)
+            return cell
         }
- //       else{
-//
-//        }
-        
-        return UITableViewCell()
     }
 }

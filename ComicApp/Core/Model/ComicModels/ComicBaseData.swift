@@ -1,16 +1,16 @@
 //
-//  ComicData.swift
+//  ComicBaseData.swift
 //  ComicApp
 //
-//  Created by Phil Martin on 10/09/2019.
+//  Created by Phil Martin on 09/10/2019.
 //  Copyright © 2019 Phil Martin. All rights reserved.
 //
 
 import Foundation
-
-struct ComicData: Codable {
+struct ComicBaseData: Codable {
+    
     let responseCode: Int?
-    let apiDataSource: DataSource?
+    let apiDataSource: ComicBookDataSource?
     
     enum CodingKeys: String, CodingKey{
         case responseCode = "code"

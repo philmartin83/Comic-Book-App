@@ -11,7 +11,7 @@ import UIKit
 class CharacterDetailTableViewDelegate: NSObject, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -39,17 +39,17 @@ class CharacterDetailTableViewDelegate: NSObject, UITableViewDelegate{
     func setupSectionHeader(title: String, tableView: UITableView) -> UIView{
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 60))
         headerView.backgroundColor = .red
-       
-       let titleForHeaderView = UILabel()
-       headerView.addSubview(titleForHeaderView)
-       titleForHeaderView.font = UIFont(name: heroFontName, size: 30)
-       titleForHeaderView.text = title
-       titleForHeaderView.textColor = .white
-       titleForHeaderView.translatesAutoresizingMaskIntoConstraints = false
-       titleForHeaderView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
-       titleForHeaderView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20).isActive = true
+        
+        let titleForHeaderView = UILabel()
+        headerView.addSubview(titleForHeaderView)
+        titleForHeaderView.font = UIFont(name: heroFontName, size: 30)
+        titleForHeaderView.text = title
+        titleForHeaderView.textColor = .white
+        titleForHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        titleForHeaderView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
+        titleForHeaderView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20).isActive = true
         titleForHeaderView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
         
-       return headerView
+        return headerView
     }
 }

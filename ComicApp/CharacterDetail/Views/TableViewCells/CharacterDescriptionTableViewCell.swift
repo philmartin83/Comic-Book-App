@@ -21,7 +21,7 @@ class CharacterDescriptionTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        contentView.backgroundColor = .white
         displayLayout()
     }
     
@@ -41,7 +41,7 @@ class CharacterDescriptionTableViewCell: UITableViewCell {
         descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: -20).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
         
     }
     

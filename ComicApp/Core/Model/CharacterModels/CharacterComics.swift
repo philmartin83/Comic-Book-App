@@ -1,5 +1,5 @@
 //
-//  SeriesItems.swift
+//  CharacterComics.swift
 //  ComicApp
 //
 //  Created by Phil Martin on 10/09/2019.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct SeriesItems : Codable {
-    let resourceURI : String?
-    let name : String?
+struct CharacterComics : Codable {
+    let collectionURI : String?
 }

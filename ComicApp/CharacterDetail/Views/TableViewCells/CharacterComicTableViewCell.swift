@@ -12,10 +12,9 @@ final class CharacterComicTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 120, height: 170)
-        //        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        flowLayout.itemSize = CGSize(width: 120, height: 250)
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 5.0
+        flowLayout.minimumInteritemSpacing = 10.0
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
@@ -23,8 +22,11 @@ final class CharacterComicTableViewCell: UITableViewCell {
         return collection
     }()
     
+    var dataSource = CharacterCollectionViewDataSource()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .white
         displayLayout()
     }
     
@@ -40,15 +42,22 @@ final class CharacterComicTableViewCell: UITableViewCell {
     
     fileprivate func displayLayout(){
         contentView.addSubview(collectionView)
+        // register the cell
+        collectionView.register(ComicBookCollectionViewCell.self, forCellWithReuseIdentifier: "ComicBooksCell")
         collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2).isActive = true
+        collectionView.dataSource = dataSource
+        dataSource.updateCollectionView = { [weak self] in
+            if let weakSelf = self{
+                // pass back to the main thread
+                DispatchQueue.main.async {
+                   weakSelf.collectionView.reloadData()
+                }
+            }
+        }
+        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        registerCollectionViewCells()
-        
     }
-    
-    fileprivate func registerCollectionViewCells(){
-//        collectionView
-    }
+
 }

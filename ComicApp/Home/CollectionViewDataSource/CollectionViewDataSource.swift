@@ -12,27 +12,25 @@ import SDWebImage
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     var updateUIWithData: ((Error?) -> Void)?
-    var comicData: ComicData?
+    var characterData: CharacterBaseData?
     
     func fetchData(){
         let request = RequestHandler().getCharacters()
-        JSONDecoder().decoderWithRequest(ComicData.self, fromURLRequest: request) { [weak self] (result, error) in
+        JSONDecoder().decoderWithRequest(CharacterBaseData.self, fromURLRequest: request) { [weak self] (result, error) in
             if let weakSelf = self{
-                weakSelf.comicData = result
+                weakSelf.characterData = result
                 weakSelf.updateUIWithData?(error)
             }
         }
-        
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let characterCount = comicData?.apiDataSource?.numberOfCharacter else {return 0}
-        return characterCount
+        return characterData?.apiDataSource?.numberOfCharacter ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let characters = comicData?.apiDataSource?.characters?[indexPath.item]
+        let characters = characterData?.apiDataSource?.characters?[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Characters", for: indexPath) as! CharacterCollectionViewCell
         let path = "\(characters?.thumbnail?.path ?? "").\(characters?.thumbnail?.fileExtension ?? "")"
         cell.heroImage.sd_setImage(with: URL(string: path), placeholderImage: nil, options: .continueInBackground, context: nil)

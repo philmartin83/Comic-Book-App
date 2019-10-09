@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct DataSource : Codable {
+struct CharacterDataSource : Codable {
     let limit: Int?
     let numberOfCharacter: Int?
     let characters: [Character]?
