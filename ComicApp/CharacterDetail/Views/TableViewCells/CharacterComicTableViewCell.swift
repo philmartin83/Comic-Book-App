@@ -12,7 +12,7 @@ final class CharacterComicTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 120, height: 250)
+        flowLayout.itemSize = CGSize(width: 120, height: 310)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 10.0
         
@@ -46,7 +46,7 @@ final class CharacterComicTableViewCell: UITableViewCell {
         collectionView.register(ComicBookCollectionViewCell.self, forCellWithReuseIdentifier: "ComicBooksCell")
         collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2).isActive = true
+        collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         collectionView.dataSource = dataSource
         dataSource.updateCollectionView = { [weak self] in
             if let weakSelf = self{
@@ -56,7 +56,7 @@ final class CharacterComicTableViewCell: UITableViewCell {
                 }
             }
         }
-        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 280).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 

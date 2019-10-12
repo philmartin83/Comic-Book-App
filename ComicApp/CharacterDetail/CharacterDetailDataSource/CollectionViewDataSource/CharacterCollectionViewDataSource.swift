@@ -9,7 +9,7 @@
 import UIKit
 
 final class CharacterCollectionViewDataSource: NSObject, UICollectionViewDataSource{
-
+    
     var comics: ComicBaseData?
     var comicSeries: CharacterComics?
     
@@ -37,15 +37,20 @@ final class CharacterCollectionViewDataSource: NSObject, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicBooksCell", for: indexPath) as! ComicBookCollectionViewCell
         let item = comics?.apiDataSource?.comics?[indexPath.item]
-     
-        let result = comicBookCoverForCell(thumbnail: item?.cover, fallback: item?.fallbackCover?.first)
-        cell.comicBookCover.sd_setImage(with: URL(string: result), completed: nil)
+    
+        if let cover = item?.cover, let path = cover.path, !path.contains("not_available"){
+            let result = comicBookCoverForCell(thumbnail: cover)
+            cell.comicBookCover.sd_setImage(with: URL(string: result), placeholderImage: UIImage(named: "Placeholder"), options: .continueInBackground, completed: nil)
         
+        }else{
+            cell.comicBookCover.image = UIImage(named: "Placeholder")
+        }
+        cell.comicTitle.text = item?.title
         return cell
     }
     
-    fileprivate func comicBookCoverForCell(thumbnail: Thumbnail?, fallback: Thumbnail?) -> String{
-        if let cover = thumbnail?.path, let ext = thumbnail?.fileExtension{
+    fileprivate func comicBookCoverForCell(thumbnail: Thumbnail) -> String{
+        if let cover = thumbnail.path, let ext = thumbnail.fileExtension{
             return cover + "." + ext
         }
         return ""

@@ -13,10 +13,19 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
     var comicBookCover: UIImageView = {
         let cover = UIImageView()
         cover.contentMode = .scaleAspectFit
-//        cover.clipsToBounds = true
-        
+        cover.clipsToBounds = true
         cover.translatesAutoresizingMaskIntoConstraints = false
         return cover
+    }()
+    
+    var comicTitle: UILabel = {
+        let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont(name: heroFontName, size: 17)
+        title.textColor = .black
+        title.numberOfLines = 0
+        title.textAlignment = .center
+        return title
     }()
     
     override init(frame: CGRect) {
@@ -33,10 +42,16 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
     
     fileprivate func displayCellContent(){
         contentView.addSubview(comicBookCover)
-        comicBookCover.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        comicBookCover.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        comicBookCover.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        comicBookCover.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        comicBookCover.widthAnchor.constraint(equalToConstant: 120).isActive = true
         comicBookCover.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        
+        contentView.addSubview(comicTitle)
+        comicTitle.topAnchor.constraint(equalTo: comicBookCover.bottomAnchor, constant: 15).isActive = true
+        comicTitle.leadingAnchor.constraint(equalTo: comicBookCover.leadingAnchor, constant: 5).isActive = true
+        comicTitle.trailingAnchor.constraint(equalTo: comicBookCover.trailingAnchor, constant: -10).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: comicTitle.bottomAnchor).isActive = true
+        
     }
     
 }
