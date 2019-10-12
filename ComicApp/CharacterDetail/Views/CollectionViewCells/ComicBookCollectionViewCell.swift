@@ -12,8 +12,9 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
     
     var comicBookCover: UIImageView = {
         let cover = UIImageView()
-        cover.contentMode = .scaleAspectFit
+        cover.contentMode = .scaleAspectFill
         cover.clipsToBounds = true
+        cover.layer.masksToBounds = true
         cover.translatesAutoresizingMaskIntoConstraints = false
         return cover
     }()
@@ -32,6 +33,7 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        self.clipsToBounds = true
         contentView.applyShadow(shadowColour: .black)
         displayCellContent()
     }
@@ -42,14 +44,16 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
     
     fileprivate func displayCellContent(){
         contentView.addSubview(comicBookCover)
-        comicBookCover.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
-        comicBookCover.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        comicBookCover.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        comicBookCover.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        comicBookCover.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        comicBookCover.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        comicBookCover.heightAnchor.constraint(lessThanOrEqualToConstant: 160).isActive = true
+
         
         contentView.addSubview(comicTitle)
         comicTitle.topAnchor.constraint(equalTo: comicBookCover.bottomAnchor, constant: 15).isActive = true
-        comicTitle.leadingAnchor.constraint(equalTo: comicBookCover.leadingAnchor, constant: 5).isActive = true
-        comicTitle.trailingAnchor.constraint(equalTo: comicBookCover.trailingAnchor, constant: -10).isActive = true
+        comicTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        comicTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
         contentView.bottomAnchor.constraint(equalTo: comicTitle.bottomAnchor).isActive = true
         
     }

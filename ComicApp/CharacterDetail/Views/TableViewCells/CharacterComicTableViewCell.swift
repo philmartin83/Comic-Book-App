@@ -12,17 +12,19 @@ final class CharacterComicTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 120, height: 310)
+        flowLayout.itemSize = CGSize(width: 130, height: 290)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 10.0
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
         collection.translatesAutoresizingMaskIntoConstraints = false
+//        collection.contentInsetAdjustmentBehavior = .never
         return collection
     }()
     
     var dataSource = CharacterCollectionViewDataSource()
+    var delegate = ComicBookCollectionViewDelegate()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,19 +46,20 @@ final class CharacterComicTableViewCell: UITableViewCell {
         contentView.addSubview(collectionView)
         // register the cell
         collectionView.register(ComicBookCollectionViewCell.self, forCellWithReuseIdentifier: "ComicBooksCell")
-        collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4).isActive = true
         collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         collectionView.dataSource = dataSource
+        collectionView.delegate = delegate
         dataSource.updateCollectionView = { [weak self] in
             if let weakSelf = self{
                 // pass back to the main thread
                 DispatchQueue.main.async {
-                   weakSelf.collectionView.reloadData()
+                    weakSelf.collectionView.reloadData()
                 }
             }
         }
-        collectionView.heightAnchor.constraint(equalToConstant: 280).isActive = true
+        collectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 310).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 
