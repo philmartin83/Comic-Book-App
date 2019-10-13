@@ -19,10 +19,10 @@ final class CharacterComicTableViewCell: UITableViewCell {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
         collection.translatesAutoresizingMaskIntoConstraints = false
-//        collection.contentInsetAdjustmentBehavior = .never
+        //        collection.contentInsetAdjustmentBehavior = .never
         return collection
     }()
-    
+    fileprivate var activity = ActivityIndicator()
     var dataSource = CharacterCollectionViewDataSource()
     var delegate = ComicBookCollectionViewDelegate()
     
@@ -55,12 +55,16 @@ final class CharacterComicTableViewCell: UITableViewCell {
             if let weakSelf = self{
                 // pass back to the main thread
                 DispatchQueue.main.async {
+                    weakSelf.activity.stopAnimating()
                     weakSelf.collectionView.reloadData()
                 }
             }
         }
         collectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 310).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        activity.displayActivity(view: contentView)
+        activity.startAanimating()
+  
     }
-
+    
 }

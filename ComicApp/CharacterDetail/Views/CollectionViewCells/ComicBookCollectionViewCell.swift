@@ -10,6 +10,8 @@ import UIKit
 
 class ComicBookCollectionViewCell: UICollectionViewCell {
     
+    var activity = ActivityIndicator()
+    
     var comicBookCover: UIImageView = {
         let cover = UIImageView()
         cover.contentMode = .scaleAspectFill
@@ -29,6 +31,14 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
         return title
     }()
     
+    var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.tintColor = .black
+        activity.color = .black
+        return activity
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.layer.cornerRadius = 10
@@ -43,6 +53,7 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func displayCellContent(){
+        
         contentView.addSubview(comicBookCover)
         comicBookCover.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         comicBookCover.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
@@ -55,6 +66,8 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
         comicTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         comicTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
         contentView.bottomAnchor.constraint(equalTo: comicTitle.bottomAnchor).isActive = true
+        
+        activity.displayActivity(view: contentView)
         
     }
     
