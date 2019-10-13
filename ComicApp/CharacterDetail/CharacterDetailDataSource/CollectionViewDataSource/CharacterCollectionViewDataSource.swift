@@ -41,7 +41,7 @@ final class CharacterCollectionViewDataSource: NSObject, UICollectionViewDataSou
         if let cover = item?.cover, let path = cover.path, !path.contains("not_available"){
             let result = comicBookCoverForCell(thumbnail: cover)
 //            cell.comicBookCover.sd_setImage(with: URL(string: result), placeholderImage: UIImage(named: "Placeholder"), options: .continueInBackground, completed: nil)
-            cell.comicBookCover.sd_setImage(with: URL(string: result)!, placeholderImage: UIImage(named: ""), options: .continueInBackground) { (image, error, cache, url) in
+            cell.comicBookCover.sd_setImage(with: URL(string: result)!, placeholderImage: nil, options: .continueInBackground) { (image, error, cache, url) in
                 cell.activity.stopAnimating()
             }
         

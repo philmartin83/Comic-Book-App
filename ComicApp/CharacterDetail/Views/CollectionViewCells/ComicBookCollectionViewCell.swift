@@ -31,14 +31,6 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
         return title
     }()
     
-    var activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        activity.tintColor = .black
-        activity.color = .black
-        return activity
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.layer.cornerRadius = 10

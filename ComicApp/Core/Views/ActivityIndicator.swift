@@ -13,6 +13,7 @@ final class ActivityIndicator{
     var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
         activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.color = .black
         return activity
     }()
     
