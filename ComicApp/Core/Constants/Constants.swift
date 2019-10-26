@@ -6,6 +6,7 @@
 //  Copyright © 2019 Phil Martin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 let heroFontName = "BadaBoomBB"
+let titleFontSize: CGFloat = 20

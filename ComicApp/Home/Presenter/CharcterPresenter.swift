@@ -34,7 +34,7 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
         navBar?.barTintColor = .red
         
         let leftTitle = UILabel()
-        leftTitle.font = UIFont(name: heroFontName, size: 20)
+        leftTitle.font = UIFont(name: heroFontName, size: titleFontSize)
         leftTitle.text = "Comic Characters"
         leftTitle.textColor = .white // we can add some custom colours later
         leftTitle.applyShadow(shadowColour: .black)

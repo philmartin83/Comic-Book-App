@@ -19,9 +19,10 @@ class CharacterDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         presenter.controller = self
-        presenter.configureNavigationBar()
         presenter.displayLayout()
         interactor.controller = self
-
+        
+        let baseNavigationController = navigationController as? BaseNavigationViewController
+        baseNavigationController?.applyStyling(navTitle: "Character Details", shouldAddBackButton: true, viewController: self)
     }
 }

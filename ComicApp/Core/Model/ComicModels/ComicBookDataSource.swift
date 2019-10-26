@@ -13,16 +13,5 @@ struct ComicBookDataSource : Codable {
     
     enum CodingKeys: String, CodingKey{
         case comics = "results"
-    }
-//
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        comics = try values.decodeIfPresent([Comic].self, forKey: .comics)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var values = encoder.container(keyedBy: CodingKeys.self)
-        try values.encodeIfPresent(self.comics, forKey: .comics)
-    }
-    
+    } 
 }

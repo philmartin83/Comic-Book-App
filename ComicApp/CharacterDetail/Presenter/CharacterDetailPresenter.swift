@@ -27,7 +27,7 @@ class CharacterDetailPresenter{
         let label = UILabel()
         label.text = "Character Information"
         label.textColor = .white
-        label.font = UIFont(name: heroFontName, size: 20)
+        label.font = UIFont(name: heroFontName, size: titleFontSize)
         label.applyShadow(shadowColour: .black)
         
         let backButton = UIButton(type: .custom)

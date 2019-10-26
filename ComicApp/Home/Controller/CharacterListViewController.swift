@@ -22,6 +22,7 @@ class CharacterListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.configureNavigationBar()
+        let navigationController = self.navigationController as? BaseNavigationViewController
+        navigationController?.applyStyling(navTitle: "Comic Characters", shouldAddBackButton: false, viewController: self)
     }
 }

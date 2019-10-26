@@ -9,6 +9,7 @@
 import UIKit
 
 class CharacterCollectionViewCell: UICollectionViewCell {
+    
     var heroImage: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true

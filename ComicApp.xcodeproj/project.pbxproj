@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0A18B42364E1830054520F /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0A18B32364E1830054520F /* BaseNavigationViewController.swift */; };
 		4A2F972F2351C3F600D218B2 /* PrivateConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F972E2351C3F600D218B2 /* PrivateConstants.swift */; };
 		4A3E7342234141D700446081 /* CharacterHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E7341234141D700446081 /* CharacterHeaderTableViewCell.swift */; };
 		4A4EA8ED2340EECF003FACC4 /* BADABB__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = FF2E46C623280F4500D98B64 /* BADABB__.TTF */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A0A18B32364E1830054520F /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
 		4A2F972E2351C3F600D218B2 /* PrivateConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateConstants.swift; sourceTree = "<group>"; };
 		4A3E7341234141D700446081 /* CharacterHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		4A4EA8F12340F39C003FACC4 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A0A18AE2364DD6B0054520F /* BaseControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A0A18B32364E1830054520F /* BaseNavigationViewController.swift */,
+			);
+			path = BaseControllers;
+			sourceTree = "<group>";
+		};
 		4A3E73402341415C00446081 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +298,7 @@
 		FF2E46992327DAE500D98B64 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4A0A18AE2364DD6B0054520F /* BaseControllers */,
 				4A78D9D02353189100AF334E /* Views */,
 				FF2E46C423280F2F00D98B64 /* Resources */,
 				FF2E46B42327F7A700D98B64 /* Model */,
@@ -529,6 +540,7 @@
 				FF33FBF9234E2B45004FE22F /* Comic.swift in Sources */,
 				FF2E469E2327DB3A00D98B64 /* CharacterListViewController.swift in Sources */,
 				4ADC4DCD234BB3B3002B1DC1 /* ComicBookCollectionViewCell.swift in Sources */,
+				4A0A18B42364E1830054520F /* BaseNavigationViewController.swift in Sources */,
 				4A4EA8F9234106DF003FACC4 /* CharacterDetailInteractor.swift in Sources */,
 				FF2E46BE2328012600D98B64 /* CharacterComics.swift in Sources */,
 				FF2E469C2327DB0400D98B64 /* CodeableExtension.swift in Sources */,

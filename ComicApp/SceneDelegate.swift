@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         // Nest the viewcontroller in a navigation controller
         let viewcontroller = CharacterListViewController()
-        let navcontroller = UINavigationController(rootViewController: viewcontroller)
+        let navcontroller = BaseNavigationViewController(rootViewController: viewcontroller)
         self.window?.rootViewController = navcontroller
         self.window?.makeKeyAndVisible()
     }
