@@ -17,6 +17,10 @@ class CharacterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setup()
+    }
+    
+    fileprivate func setup(){
         view.backgroundColor = .white
         presenter.controller = self
         presenter.displayLayout()

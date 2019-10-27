@@ -15,13 +15,23 @@ class CharacterListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setup()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavBar()
+        
+    }
+    
+    fileprivate func setup(){
         view.backgroundColor = .white // use systemBackground if you wish to support dark mode in iOS 13
         presenter.controller = self
         presenter.displayLayout()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    fileprivate func setupNavBar(){
         let navigationController = self.navigationController as? BaseNavigationViewController
         navigationController?.applyStyling(navTitle: "Comic Characters", shouldAddBackButton: false, viewController: self)
     }
