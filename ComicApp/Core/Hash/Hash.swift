@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import CommonCrypto
 
 func MD5(str: String) -> String {
