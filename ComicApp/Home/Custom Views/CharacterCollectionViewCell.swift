@@ -56,4 +56,11 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         name.centerYAnchor.constraint(equalTo: nameHolderView.centerYAnchor).isActive = true
         
     }
+    
+    func setData(character: Character?){
+        name.text = character?.name
+        guard let path = character?.thumbnail?.path, let ext = character?.thumbnail?.fileExtension else {return}
+        let url = path + "." + ext
+        heroImage.sd_setImage(with: URL(string: url), placeholderImage: nil, options: .continueInBackground, context: nil)
+    }
 }

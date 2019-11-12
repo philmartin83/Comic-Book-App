@@ -30,11 +30,9 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let characters = characterData?.apiDataSource?.characters?[indexPath.item]
+        let character = characterData?.apiDataSource?.characters?[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Characters", for: indexPath) as! CharacterCollectionViewCell
-        let path = "\(characters?.thumbnail?.path ?? "").\(characters?.thumbnail?.fileExtension ?? "")"
-        cell.heroImage.sd_setImage(with: URL(string: path), placeholderImage: nil, options: .continueInBackground, context: nil)
-        cell.name.text = characters?.name
+        cell.setData(character: character)
         return cell
     }
 }
