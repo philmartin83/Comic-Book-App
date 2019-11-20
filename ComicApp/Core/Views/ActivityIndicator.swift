@@ -21,9 +21,7 @@ final class ActivityIndicator{
         view.addSubview(activityIndicator)
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
     }
-    
     
     func startAanimating(){
         activityIndicator.startAnimating()

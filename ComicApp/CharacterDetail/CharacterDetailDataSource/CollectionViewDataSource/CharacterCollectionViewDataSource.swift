@@ -15,9 +15,9 @@ final class CharacterCollectionViewDataSource: NSObject, UICollectionViewDataSou
     
     var updateCollectionView: (()-> Void)?
     
-    func fetchComicData(series: String?){
-        guard let series = series else {return}
-        let request = RequestHandler().getComics(comicSeries: series)
+    func fetchComicData(id: Int?){
+        guard let id = id else {return}
+        let request = RequestHandler().getComics(id: id)
         JSONDecoder().decoderWithRequest(ComicBaseData.self, fromURLRequest: request) { [weak self] (result, error) in
             if let weakSelf = self{
                 weakSelf.comics = result

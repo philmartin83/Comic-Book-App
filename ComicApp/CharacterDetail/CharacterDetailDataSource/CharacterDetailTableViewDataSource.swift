@@ -43,7 +43,7 @@ class CharacterDetailTableViewDataSource: NSObject, UITableViewDataSource{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterComics", for: indexPath) as! CharacterComicTableViewCell
-            cell.dataSource.fetchComicData(series: character?.comics?.collectionURI)
+            cell.dataSource.fetchComicData(id: character?.id)
             return cell
         }
     }
