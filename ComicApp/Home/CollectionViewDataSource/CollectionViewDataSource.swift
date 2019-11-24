@@ -12,25 +12,31 @@ import SDWebImage
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     var updateUIWithData: ((Error?) -> Void)?
-    var characterData: CharacterBaseData?
+    var characters = [Character]()
     
-    func fetchData(){
-        let request = RequestHandler().getCharacters()
+    func fetchData(pageNumber: Int){
+        let request = RequestHandler().getCharacters(pageNumber: pageNumber)
         JSONDecoder().decoderWithRequest(CharacterBaseData.self, fromURLRequest: request) { [weak self] (result, error) in
             if let weakSelf = self{
-                weakSelf.characterData = result
+                let charactersResult = result?.apiDataSource?.characters
+                if let characters = charactersResult{
+                    weakSelf.characters.append(contentsOf: characters)
+                }else{
+                    // show alert
+                }
+                
                 weakSelf.updateUIWithData?(error)
             }
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return characterData?.apiDataSource?.numberOfCharacter ?? 0
+        return characters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let character = characterData?.apiDataSource?.characters?[indexPath.item]
+        let character = characters[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Characters", for: indexPath) as! CharacterCollectionViewCell
         cell.setData(character: character)
         return cell

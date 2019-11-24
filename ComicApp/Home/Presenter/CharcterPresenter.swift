@@ -12,6 +12,8 @@ import UIKit
 class CharaterPresenter: NSObject, UICollectionViewDelegate {
     
     weak var controller: CharacterListViewController?
+    var pageCounter = 1
+    var activityIndicator = ActivityIndicator()
     private let dataSource = CollectionViewDataSource()
     
     var collectionView: UICollectionView = {
@@ -51,16 +53,20 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
         collectionView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
         collectionView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        activityIndicator.displayActivity(view: collectionView)
+        activityIndicator.startAanimating()
         fetchData()
     }
     
     //MARK:- Helper
     fileprivate func fetchData(){
-        dataSource.fetchData()
+        dataSource.fetchData(pageNumber: 0)
         dataSource.updateUIWithData = { [weak self] (error) in
-            if error == nil{
+            if let weakSelf = self, error == nil{
                 DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
+                    weakSelf.activityIndicator.stopAnimating()
+                    weakSelf.collectionView.reloadData()
+                    weakSelf.pageCounter += 1
                 }
             }
         }
@@ -69,13 +75,22 @@ class CharaterPresenter: NSObject, UICollectionViewDelegate {
     //MARK:- CollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let character = dataSource.characterData?.apiDataSource?.characters?[indexPath.item]
+        let character = dataSource.characters[indexPath.item]
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.animateButtonPress()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             let detailViewController = CharacterDetailViewController()
             detailViewController.character = character
         self?.controller?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height - 160{
+            dataSource.fetchData(pageNumber: pageCounter)
         }
     }
     

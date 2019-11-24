@@ -24,7 +24,6 @@ final class CharacterComicTableViewCell: UITableViewCell {
     }()
     fileprivate var activity = ActivityIndicator()
     var dataSource = CharacterCollectionViewDataSource()
-    var delegate = ComicBookCollectionViewDelegate()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -50,7 +49,6 @@ final class CharacterComicTableViewCell: UITableViewCell {
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4).isActive = true
         collectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         collectionView.dataSource = dataSource
-        collectionView.delegate = delegate
         dataSource.updateCollectionView = { [weak self] in
             if let weakSelf = self{
                 // pass back to the main thread

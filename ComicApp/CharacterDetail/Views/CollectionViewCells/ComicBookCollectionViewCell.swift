@@ -63,4 +63,18 @@ class ComicBookCollectionViewCell: UICollectionViewCell {
         
     }
     
+    func setData(comic: Comic?){
+        comicTitle.text = comic?.title
+        activity.startAanimating()
+        guard let path = comic?.cover?.path, let ext = comic?.cover?.fileExtension else {
+            comicBookCover.image = UIImage(named: "Placeholder")
+            activity.stopAnimating()
+            return
+        }
+        let url = path + "." + ext
+        comicBookCover.sd_setImage(with: URL(string: url)!, placeholderImage: nil, options: .continueInBackground) { (image, error, cache, url) in
+            self.activity.stopAnimating()
+        }
+    }
+    
 }

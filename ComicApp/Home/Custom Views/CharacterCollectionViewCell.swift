@@ -10,6 +10,8 @@ import UIKit
 
 class CharacterCollectionViewCell: UICollectionViewCell {
     
+    var activityIndicator = ActivityIndicator()
+    
     var heroImage: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -59,8 +61,16 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     
     func setData(character: Character?){
         name.text = character?.name
-        guard let path = character?.thumbnail?.path, let ext = character?.thumbnail?.fileExtension else {return}
+        activityIndicator.displayActivity(view: contentView)
+        activityIndicator.startAanimating()
+        guard let path = character?.thumbnail?.path, let ext = character?.thumbnail?.fileExtension else{
+            heroImage.image = UIImage(named: "PlaceHolder")
+            activityIndicator.stopAnimating()
+            return
+        }
         let url = path + "." + ext
-        heroImage.sd_setImage(with: URL(string: url), placeholderImage: nil, options: .continueInBackground, context: nil)
+        heroImage.sd_setImage(with: URL(string: url), placeholderImage: nil, options: .continueInBackground) { (image, error, cache, url) in
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

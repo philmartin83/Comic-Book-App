@@ -9,12 +9,13 @@
 import Foundation
 
 class RequestHandler{
+    private var limit: Int = 30
     private let baseURL = "https://gateway.marvel.com"
     
-    func getCharacters() -> URLRequest{
+    func getCharacters(pageNumber: Int = 0) -> URLRequest{
         let endpoint = "/v1/public/characters"
-        let url = baseURL + endpoint + buildQueryString()
-        
+        let url = baseURL + endpoint + buildQueryString(pageNumber: pageNumber, isCharacterList: true)
+        print(url)
         let request = URLRequest(url: URL(string: url)!)
         return request
         
@@ -30,10 +31,14 @@ class RequestHandler{
         
     }
     
-    private func buildQueryString() -> String{
+    private func buildQueryString(pageNumber: Int = 0, isCharacterList: Bool = false) -> String{
         let timeStamp = Date().timeIntervalSince1970
-        
-        let queryString = "?ts=\(timeStamp)&apikey=\(publicKey)&hash=\(buildHashToken(timestamp: timeStamp))"
+        var queryString = "?ts=\(timeStamp)&apikey=\(publicKey)&hash=\(buildHashToken(timestamp: timeStamp))"
+        if isCharacterList{
+            var pageNumber = pageNumber
+            pageNumber = limit * pageNumber
+            queryString = queryString + "&limit=\(limit)&offset=\(pageNumber)"
+        }
         return queryString
     }
     
